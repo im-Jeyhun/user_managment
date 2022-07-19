@@ -5,7 +5,7 @@ namespace user_managment.UI
 {
     internal class Program
     {
-        static void Main(string[] args)
+       public static void Main(string[] args)
         {
             Console.WriteLine("___________________________________________________________________");
             Console.WriteLine();

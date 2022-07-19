@@ -34,42 +34,55 @@ namespace user_managment.ApplicationLogic
                 if (UserRepository.IsUserExistsByEmailAndPassword(email, password))
                 {
 
-                    if (email == "admin@gmail.com")
+                    User user = UserRepository.GetByEmail(email);
+
+                    if (user.IsAdmin)
                     {
-                        User user = UserRepository.GetByEmail(email);
-                        Console.WriteLine($"Admin succesfully joined : {user.GetUserInfo()}");
-                        Console.WriteLine("Insert /show-users command for see all users");
-                        string command = Console.ReadLine();
-                        if (command == "/show-users")
-                        {
-                            List<User> users = UserRepository.GetAll();
-                            foreach (User user1 in users)
-                            {
-
-                                Console.WriteLine(user1.GetUserInfoForAdmin());
-
-                            }
-                        }
+                        Dashboard.AdminPanel(email);
                     }
                     else
                     {
-                        User user = UserRepository.GetByEmail(email);
-                        Console.WriteLine($"User succesfully joined : {user.GetUserInfo()}");
+                        Dashboard.UserPanel(email);
                     }
                 }
                 else
                 {
                     Console.WriteLine("Email or password not correct.");
                 }
-                break;
+               
             }
 
         }
 
         private static string GetName()
         {
-            Console.Write("Insert Name : ");
-            string name = Console.ReadLine();
+            bool isEceptionValid;
+            string name = null;
+            do
+            {
+                try
+                {
+
+                    Console.Write("Insert Name : ");
+                    name = Console.ReadLine();
+                    isEceptionValid = false;
+                    if (name == "null")
+                    {
+                        throw new Exception("seflik var2");
+
+                    }
+                }
+                catch (Exception)
+                {
+
+                    isEceptionValid = true;
+                    throw new Exception("seflik var");
+                }
+
+            } while (isEceptionValid || !UserValidation.IsNameValid(name));
+
+
+
             while (!UserValidation.IsNameValid(name))
             {
                 Console.Write("Pls enter name again : ");

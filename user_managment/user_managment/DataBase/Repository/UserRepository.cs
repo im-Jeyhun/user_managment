@@ -11,7 +11,7 @@ namespace user_managment.DataBase.Repository
     {
         private static List<User> Users { get; set; } = new List<User>()
         {
-            new User("Super","Admin", "admin@gmail.com","123321" )
+            new User("Super","Admin", "admin@gmail.com","123321" , true )
         };
 
         public static User Add(string name, string lastName, string email, string password)

@@ -8,7 +8,7 @@ namespace user_managment.DataBase.Models
 {
     internal class User
     {
-        private DateTime RegistrationDate { get; set; }
+        private DateTime RegistrationDate { get; } = DateTime.Now;
 
         private static int idCounter = 1;
         public int Id { get; set; }
@@ -20,14 +20,17 @@ namespace user_managment.DataBase.Models
 
         public string Password { get; set; }
 
-        public User(string name, string lastName, string email, string password)
+        public bool IsAdmin { get; set; }
+
+        public User(string name, string lastName, string email, string password, bool ısAdmin = false)
         {
             Id = idCounter++;
             Name = name;
             LastName = lastName;
             Email = email;
             Password = password;
-            RegistrationDate = DateTime.Now;
+            IsAdmin = ısAdmin;
+            //RegistrationDate = DateTime.Now;
 
         }
         public string GetUserInfo()
